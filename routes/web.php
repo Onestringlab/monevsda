@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('/');
+// });
 
 Route::get('/example', function () {
     return view('templates/example');
