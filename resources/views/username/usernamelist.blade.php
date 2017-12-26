@@ -15,7 +15,7 @@ th{
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
-			<h2>Data Username</h2> 
+			<h2>Data Pengguna</h2> 
 			<a href="{{asset('/')}}username/insert" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></a>
 			<div class="clearfix"></div>
 		</div>
@@ -24,31 +24,31 @@ th{
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>username</th>
-						<th>name</th>
-						<th>email</th>
-						<th>role</th>
-						{{--  <th>password</th>  --}}
+						<th>Username</th>
+						<th>Nama</th>
+						<th>E-Mail</th>
+						<th>Role</th>
+						<th>Oleh</th>
 						{{--  <th>created_at</th>  --}}
-						<th>updated_at</th>
+						<th>Waktu</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					@php ($no = 1)
-					@foreach ($rows as $row)
+					@foreach ($datausername as $username)
 					<tr>
-						<td>{{ $row['idusername'] }}</td>
-						<td>{{ $row['username'] }}</td>
-						<td>{{ $row['name'] }}</td>
-						<td>{{ $row['email'] }}</td>
-						<td>{{ $row['role'] }}</td>
-						{{--  <td>{{ $row['password'] }}</td>  --}}
-						{{--  <td>{{ $row['created_at'] }}</td>  --}}
-						<td>{{ $row['updated_at'] }}</td>
+						<td>{{ $no++ }}</td>
+						<td>{{ $username['username'] }}</td>
+						<td>{{ $username['name'] }}</td>
+						<td>{{ $username['email'] }}</td>
+						<td>{{ $username['role'] }}</td>
+						<td>{{ $username['modified_by'] }}</td>
+						{{--  <td>{{ $username['created_at'] }}</td>  --}}
+						<td>{{ $username['updated_at'] }}</td>
 						<td align="center">
-							<a href="{{asset('/')}}username/{{ $row->idusername }}/update" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
-							<a href="{{asset('/')}}username/{{ $row->idusername }}/delete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+							<a href="{{asset('/')}}username/{{ $username->idusername }}/update" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> </a>
+							<a href="{{asset('/')}}username/{{ $username->idusername }}/delete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
 						</td>
 					</tr>
 					@endforeach

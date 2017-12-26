@@ -1,3 +1,4 @@
+@if (session()->has('name') && session()->get('name')!='')
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,22 +18,12 @@
     <link href="{{asset('/')}}vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-wysiwyg -->
     <link href="{{asset('/')}}vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-    <!-- Datatables -->
-    <link href="{{asset('/')}}vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('/')}}vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('/')}}vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('/')}}vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('/')}}vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-    <!-- Select2 -->
-    <link href="{{asset('/')}}vendors/select2/dist/css/select2.min.css" rel="stylesheet">
-    <!-- Switchery -->
-    <link href="{{asset('/')}}vendors/switchery/dist/switchery.min.css" rel="stylesheet">
-    <!-- starrr -->
-    <link href="{{asset('/')}}vendors/starrr/dist/starrr.css" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="{{asset('/')}}vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
     <!-- Custom styling plus plugins -->
     <link href="{{asset('/')}}build/css/custom.min.css" rel="stylesheet">
+
+    <!-- CSS Public -->
+    <link href="{{asset('/')}}css/custom.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -41,7 +32,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>SISINFO</span></a>
+              <a href="{{ asset('/app')}}" class="site_title"><i class="fa fa-paw"></i> <span>SIMONESDA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -53,7 +44,11 @@
               </div>
               <div class="profile_info">
                 <span>Selamat Datang,</span>
-                <h2>Yulrio Brianorman</h2>
+                <h2>
+                @if (session()->has('name'))
+                  {{session()->get('name')}}
+                @endif
+                </h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -63,23 +58,26 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.html">Dashboard</a></li>
                       <li><a href="index2.html">Dashboard2</a></li>
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
-                  </li>
+                  </li> -->
+                  @if(session()->get('role')=='Superman')
                   <li><a><i class="fa fa-database"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{asset('/')}}username">Username</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
+                      <li><a href="{{asset('/')}}kecamatan">Kecamatan - Desa</a></li>
+                      <li><a href="{{asset('/')}}konsultan">Konsultan</a></li>
+                      <li><a href="{{asset('/')}}log">Log Aktifitas</a></li>
+                      <li><a href="{{asset('/')}}lov">Lov</a></li>
+                      <li><a href="{{asset('/')}}username">Pengguna</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  @endif
+                 <!--  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">General Form</a></li>
                       <li><a href="form_advanced.html">Advanced Components</a></li>
@@ -122,10 +120,10 @@
                       <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
                       <li><a href="fixed_footer.html">Fixed Footer</a></li>
                     </ul>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
-              <div class="menu_section">
+              <!-- <div class="menu_section">
                 <h3>Live On</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
@@ -166,7 +164,7 @@
                   </li>
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
-              </div>
+              </div> -->
 
             </div>
             <!-- /sidebar menu -->
@@ -201,23 +199,26 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{asset('/')}}images/img.jpg" alt="">John Doe
+                    <img src="{{asset('/')}}images/img.jpg" alt="">
+                    @if (session()->has('name'))
+                      {{session()->get('name')}}
+                    @endif
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <!-- <li><a href="javascript:;"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
                     </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="javascript:;">Help</a></li> -->
+                    <li><a href="{{asset('/')}}keluar"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
-                <li role="presentation" class="dropdown">
+                <!-- <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     <span class="badge bg-green">6</span>
@@ -280,7 +281,7 @@
                       </div>
                     </li>
                   </ul>
-                </li>
+                </li> -->
               </ul>
             </nav>
           </div>
@@ -299,7 +300,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            SIMONESDA - Dinas PU Kuburaya 2017
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -409,39 +410,10 @@
     <script src="{{asset('/')}}vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
     <script src="{{asset('/')}}vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
     <script src="{{asset('/')}}vendors/google-code-prettify/src/prettify.js"></script>
-    <!-- Datatables -->
-    <script src="{{asset('/')}}vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="{{asset('/')}}vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="{{asset('/')}}vendors/jszip/dist/jszip.min.js"></script>
-    <script src="{{asset('/')}}vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="{{asset('/')}}vendors/pdfmake/build/vfs_fonts.js"></script>
-    <!-- jQuery Tags Input -->
-    <script src="{{asset('/')}}vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-    <!-- Switchery -->
-    <script src="{{asset('/')}}vendors/switchery/dist/switchery.min.js"></script>
-    <!-- Select2 -->
-    <script src="{{asset('/')}}vendors/select2/dist/js/select2.full.min.js"></script>
-    <!-- Parsley -->
-    <script src="{{asset('/')}}vendors/parsleyjs/dist/parsley.min.js"></script>
-    <!-- Autosize -->
-    <script src="{{asset('/')}}vendors/autosize/dist/autosize.min.js"></script>
-    <!-- jQuery autocomplete -->
-    <script src="{{asset('/')}}vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-    <!-- starrr -->
-    <script src="{{asset('/')}}vendors/starrr/dist/starrr.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('/')}}build/js/custom.min.js"></script>
 
   </body>
 </html>
+@endif
