@@ -49,7 +49,8 @@ public function manage(Request $request){
 		//data log
     $log = new Log;
     $log -> aktivitas = 'Menambahkan data konsultan';
-    $log -> keterangan = 'Data : '.$request -> nama.', '.$request -> alamat;
+    $log -> keterangan = json_encode($konsultan);
+		$log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 	}
@@ -70,7 +71,8 @@ public function manage(Request $request){
 		//data log
     $log = new Log;
     $log -> aktivitas = 'Mengedit data konsultan';
-    $log -> keterangan = 'Data : '.$request -> nama;
+    $log -> keterangan = json_encode($konsultan);
+		$log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 	}
@@ -80,7 +82,8 @@ public function manage(Request $request){
 		//data log
     $log = new Log;
     $log -> aktivitas = 'Menghapus data konsultan';
-    $log -> keterangan = 'Data : '.$konsultan -> nama.', '.$konsultan -> alamat;
+    $log -> keterangan = json_encode($konsultan);
+		$log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 

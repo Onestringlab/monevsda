@@ -21,32 +21,40 @@ function button_cancel(){
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">
-			<form class="form-horizontal" action="{{ asset('/') }}username/manage" method="post">
+			<form class="form-horizontal" action="{{ asset('/') }}username/manage" method="post" enctype="multipart/form-data">
 				@if($action == 'insert')
 					<div class="form-group">
-						<label class="col-sm-1 control-label">Username</label>
-						<div class="col-sm-3">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Username</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="username" value="" {!! fieldRequired('Masukkan Username Dengan Benar') !!}>
 						</div>
-						<label class="col-sm-1 control-label">Nama</label>
-						<div class="col-sm-3">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="name" value="" {!! fieldRequired('Masukkan Nama Dengan Benar') !!}>
-						</div>
-						<label class="col-sm-1 control-label">Email</label>
-						<div class="col-sm-3">
-							<input class="form-control" type="email" name="email" value="" {!! fieldRequired('Masukkan Email Dengan Benar') !!}>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-1 control-label">Role</label>
-						<div class="col-sm-3">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Email</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<input class="form-control" type="email" name="email" value="" {!! fieldRequired('Masukkan Email Dengan Benar') !!}>
+						</div>
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Role</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{!!selectForm($datarole,'kode','value','role','')!!}
 						</div>
-						<label class="col-sm-1 control-label">Password</label>
-						<div class="col-sm-3">
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Photo</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<input class="form-control" type="file" name="photo" value="" {!! fieldRequired('Masukkan Photo') !!}>
+						</div>
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Password</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="password" name="password" value="" {!! fieldRequired('Masukkan Password') !!}>
 						</div>
-						<div class="col-sm-offset-1 col-sm-3">
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-3">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<button type="submit" class="btn btn-success">Insert</button>
 							<button type="button" class="btn btn-primary" onclick="button_cancel()">Cancel</button>
@@ -54,64 +62,77 @@ function button_cancel(){
 					</div>
 				@elseif($action == 'update')
 					<div class="form-group">
-						<label class="col-sm-1 control-label">Username</label>
-						<div class="col-sm-3">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Username</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="username" value="{{ $row->username }}">
 						</div>
-						<label class="col-sm-1 control-label">Nama</label>
-						<div class="col-sm-3">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="name" value="{{ $row->name }}">
-						</div>
-						<label class="col-sm-1 control-label">Email</label>
-						<div class="col-sm-3">
-	   					<input class="form-control" type="text" name="email" value="{{ $row->email }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-1 control-label">Role</label>
-						<div class="col-sm-3">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Email</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+	   					<input class="form-control" type="text" name="email" value="{{ $row->email }}">
+						</div>
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Role</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{!!selectForm($datarole,'kode','value','role',$row->role)!!}
 						</div>
-						<label class="col-sm-1 control-label">Password</label>
-						<div class="col-sm-3">
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Photo</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<input class="form-control" type="file" name="photo" value="">
+						</div>
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Password</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="password" name="password" value="">
 						</div>
-						<div class="col-sm-offset-1 col-sm-3">
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-xs-12 col-sm-4 col-md-4">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<input type = "hidden" name = "idusername" value = "{{ $row->idusername }}"?>
+							<input type = "hidden" name = "photolama" value = "{{ $row->photo }}"?>
 							<button type="submit" class="btn btn-success">Update</button>
 							<button type="button" class="btn btn-primary" onclick="button_cancel()">Cancel</button>
 						</div>
 					</div>
 				@elseif($action == 'delete')
 					<div class="form-group">
-						<label class="col-sm-1 control-label">Username</label>
-						<div class="col-sm-3">
-							{{ $row->username }}
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Username</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->username }}
 						</div>
-						<label class="col-sm-1 control-label">Nama</label>
-						<div class="col-sm-3">
-							{{ $row->name }}
-						</div>
-						<label class="col-sm-1 control-label">Email</label>
-						<div class="col-sm-3">
-							{{ $row->email }}
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->name }}
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-1 control-label">Role</label>
-						<div class="col-sm-2">
-							{{ $row->role }}
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Email</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->email }}
 						</div>
-						<label class="col-sm-1 control-label">Oleh</label>
-						<div class="col-sm-2">
-							{{ $row->modified_by }}
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Role</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->role }}
 						</div>
-						<label class="col-sm-1 control-label">Waktu</label>
-						<div class="col-sm-2">
-							{{ $row->updated_at }}
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Oleh</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->modified_by }}
 						</div>
-						<div class="col-sm-3">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Waktu</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->updated_at }}
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-xs-12 col-sm-4 col-md-4">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<input type = "hidden" name = "idusername" value = "{{ $row->idusername }}"?>
 							<button type="submit" class="btn btn-success">Delete</button>
@@ -126,6 +147,7 @@ function button_cancel(){
 	</div>
 </div>
 
+<div class="row">
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
@@ -171,7 +193,7 @@ function button_cancel(){
 		</div>
 	</div>
 </div>
-
+</div>
 
 
 @endsection

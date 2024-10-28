@@ -7,4 +7,5 @@ class Kecamatan extends Model
 {
 	public $primaryKey  = 'idkecamatan';
 	protected $table = 'tb_kecamatan';
+
 }

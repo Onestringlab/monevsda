@@ -50,6 +50,14 @@ public function manage(Request $request){
 		// $kecamatan -> at = $request -> at;
 		// $kecamatan -> updated_at = $request -> updated_at;
 		$kecamatan -> save();
+
+		//data log
+    $log = new Log;
+    $log -> aktivitas = 'Menambah data kecamatan';
+    $log -> keterangan = json_encode($kecamatan);
+		$log -> tahun = session() -> get('ta');
+    $log -> modified_by = $request->session()->get('username');
+    $log -> save();
 	}
 	else if($request -> action == 'update'){
 		$kecamatan = Kecamatan::find($request -> idkecamatan);
@@ -61,11 +69,27 @@ public function manage(Request $request){
 		// $kecamatan -> created_at = $request -> created_at;
 		// $kecamatan -> updated_at = $request -> updated_at;
 		$kecamatan -> save();
+
+		//data log
+    $log = new Log;
+    $log -> aktivitas = 'Mengedit data kecamatan';
+    $log -> keterangan = json_encode($kecamatan);
+		$log -> tahun = session() -> get('ta');
+    $log -> modified_by = $request->session()->get('username');
+    $log -> save();
 	}
 	else if($request -> action == 'delete'){
 		$kecamatan = Kecamatan::find($request -> idkecamatan);
-		Desa::where('idkecamatan',$request -> idkecamatan)->delete();
+		Desa::where('idkecamatan',$request -> idkecamatan) -> delete();
 		$kecamatan -> delete();
+
+		//data log
+    $log = new Log;
+    $log -> aktivitas = 'Menghapus data kecamatan';
+    $log -> keterangan = json_encode($kecamatan);
+		$log -> tahun = session() -> get('ta');
+    $log -> modified_by = $request->session()->get('username');
+    $log -> save();
 	}
 	return redirect('/kecamatan');
 }

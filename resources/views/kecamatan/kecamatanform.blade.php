@@ -21,19 +21,23 @@ function button_cancel(){
 			<form class="form-horizontal" action="{{ asset('/') }}kecamatan/manage" method="post">
 				@if($action == 'insert')
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Nama Kecamatan</label>
-						<div class="col-sm-2">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama Kecamatan</label>
+						<div class="col-xs-12 col-sm-10 col-md-10">
 							<input class="form-control" type="text" name="nama" value="">
 						</div>
-						<label class="col-sm-2 control-label">Kode Kecamatan</label>
-						<div class="col-sm-1">
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Kode Kecamatan</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="kode" value="">
 						</div>
-						<label class="col-sm-1 control-label">Status</label>
-						<div class="col-sm-1">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Status</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{!!selectForm($datastatus,'kode','value','status','')!!}
 						</div>
-						<div class="col-sm-3">
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-3">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<button type="submit" class="btn btn-success">Insert</button>
 							<button type="button" class="btn btn-primary" onclick="button_cancel()">Cancel</button>
@@ -41,19 +45,23 @@ function button_cancel(){
 					</div>
 				@elseif($action == 'update')
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Nama Kecamatan</label>
-						<div class="col-sm-2">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama Kecamatan</label>
+						<div class="col-xs-12 col-sm-10 col-md-10">
 	   					<input class="form-control" type="text" name="nama" value="{{ $row->nama }}">
 						</div>
-						<label class="col-sm-2 control-label">Kode Kecamatan</label>
-						<div class="col-sm-1">
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Kode Kecamatan</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="kode" value="{{ $row->kode }}">
 						</div>
-						<label class="col-sm-1 control-label">Status</label>
-						<div class="col-sm-1">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Status</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{!!selectForm($datastatus,'kode','value','status',$row->status)!!}
 						</div>
-						<div class="col-sm-3">
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-3">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<input type = "hidden" name = "idkecamatan" value = "{{ $row->idkecamatan }}"?>
 							<button type="submit" class="btn btn-success">Update</button>
@@ -62,37 +70,33 @@ function button_cancel(){
 					</div>
 				@elseif($action == 'delete')
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Nama Kecamatan</label>
-						<div class="col-sm-10">
-							{{ $row->nama }}
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama Kecamatan</label>
+						<div class="col-xs-12 col-sm-10 col-md-10">
+							: {{ $row->nama }}
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Kode Kecamatan</label>
-						<div class="col-sm-10">
-							{{ $row->kode }}
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Kode Kecamatan</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->kode }}
+						</div>
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Status</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->status }}
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Status</label>
-						<div class="col-sm-10">
-							{{ $row->status }}
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Oleh</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->modified_by }}
+						</div>
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Waktu</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							: {{ $row->updated_at }}
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Oleh</label>
-						<div class="col-sm-10">
-							{{ $row->modified_by }}
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Waktu</label>
-						<div class="col-sm-10">
-							{{ $row->updated_at }}
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2 col-xs-12 col-sm-4 col-md-4">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<input type = "hidden" name = "idkecamatan" value = "{{ $row->idkecamatan }}"?>
 							<button type="submit" class="btn btn-success">Delete</button>
@@ -107,6 +111,7 @@ function button_cancel(){
 	</div>
 </div>
 
+<div class="row">
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<div class="x_panel">
 		<div class="x_title">
@@ -151,5 +156,6 @@ function button_cancel(){
 			</table>
 		</div>
 	</div>
+</div>
 </div>
 @endsection

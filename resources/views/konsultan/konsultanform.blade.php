@@ -21,43 +21,37 @@ function button_cancel(){
 			<form class="form-horizontal" action="{{ asset('/') }}konsultan/manage" method="post">
 				@if($action == 'insert')
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Nama Konsultan</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama Konsultan</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="nama" value="">
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Alamat</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Alamat</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="alamat" value="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Penanggung Jawab</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Penanggung Jawab</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="penanggungjawab" value="">
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">No Telp</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">No Telp</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="notelp" value="">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">E-Mail</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">E-Mail</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							<input class="form-control" type="text" name="email" value="">
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Status</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Status</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{!!selectForm($datastatus,'kode','value','status','')!!}
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2 col-xs-12 col-sm-4 col-md-4">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<button type="submit" class="btn btn-success">Insert</button>
 							<button type="button" class="btn btn-primary" onclick="button_cancel()">Cancel</button>
@@ -65,43 +59,37 @@ function button_cancel(){
 					</div>
 				@elseif($action == 'update')
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Nama Konsultan</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama Konsultan</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="nama" value="{{ $row->nama }}">
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Alamat</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Alamat</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="alamat" value="{{ $row->alamat }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Penanggung Jawab</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Penanggung Jawab</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="penanggungjawab" value="{{ $row->penanggungjawab }}">
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">No Telp</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">No Telp</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="notelp" value="{{ $row->notelp }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">E-Mail</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">E-Mail</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 	   					<input class="form-control" type="text" name="email" value="{{ $row->email }}">
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Status</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Status</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{!!selectForm($datastatus,'kode','value','status',$row->status)!!}
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2 col-xs-12 col-sm-4 col-md-4">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<input type = "hidden" name = "idkonsultan" value = "{{ $row->idkonsultan }}"?>
 							<button type="submit" class="btn btn-success">Update</button>
@@ -110,55 +98,47 @@ function button_cancel(){
 					</div>
 				@elseif($action == 'delete')
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Nama Konsultan</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Nama Konsultan</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->nama }}
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Alamat</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Alamat</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->alamat }}
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Penanggung Jawab</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Penanggung Jawab</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->penanggungjawab }}
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">No Telp</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">No Telp</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->notelp }}
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">E-Mail</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">E-Mail</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->email }}
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Oleh</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Oleh</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->modified_by }}
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Waktu</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Waktu</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->updated_at }}
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Status</label>
-						<div class="col-sm-10">
+						<label class="col-xs-12 col-sm-2 col-md-2 tebal">Status</label>
+						<div class="col-xs-12 col-sm-4 col-md-4">
 							{{ $row->status }}
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
+						<div class="col-sm-offset-2 col-xs-12 col-sm-4 col-md-4">
 							<input type = "hidden" name = "action" value = "{{ $action }}"?>
 							<input type = "hidden" name = "idkonsultan" value = "{{ $row->idkonsultan }}"?>
 							<button type="submit" class="btn btn-success">Delete</button>

@@ -9,7 +9,7 @@ use App\Log;
 class LogController extends Controller {
 
 public function index(){
-	$datalog = Log::orderBy('updated_at', 'desc')->paginate(15);
+	$datalog = Log::where('tahun',session()->get('ta'))->orderBy('updated_at', 'desc')->paginate(15);
 	return view('log/loglist',['datalog' => $datalog]);
 }
 
@@ -33,6 +33,7 @@ public function manage(Request $request){
 		// $log -> idlog = $request -> idlog;
 		$log -> aktivitas = $request -> aktivitas;
 		$log -> keterangan = $request -> keterangan;
+		$log -> tahun = session() -> get('ta');
 		$log -> modified_by = session()->get('username');
 		// $log -> created_at = $request -> created_at;
 		// $log -> updated_at = $request -> updated_at;
@@ -43,6 +44,7 @@ public function manage(Request $request){
 		// $log -> idlog = $request -> idlog;
 		$log -> aktivitas = $request -> aktivitas;
 		$log -> keterangan = $request -> keterangan;
+		$log -> tahun = session() -> get('ta');
 		$log -> modified_by = session()->get('username');
 		// $log -> created_at = $request -> created_at;
 		// $log -> updated_at = $request -> updated_at;

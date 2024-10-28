@@ -13,17 +13,17 @@
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">
-			<table class="table table-striped table-bordered ">
+			<table class="table table-striped jambo_table">
 				<thead>
-					<tr>
-						<th>#</th>
+					<tr class="headings">
+						<th width="30px">#</th>
 						<th>Nama Kecamatan</th>
-						<th>Kode Kecamatan</th>
-						<th>Status</th>
-						<th>Oleh</th>
+						<th width="140px">Kode Kecamatan</th>
+						<th width="80px">Status</th>
+						<th width="80px">Oleh</th>
 						<!-- <th>created_by</th> -->
-						<th>Waktu</th>
-						<th></th>
+						<th width="140px">Waktu</th>
+						<th width="140px"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -33,7 +33,7 @@
 						<td>{{ $no++ }}</td>
 						<td>{{ $kecamatan['nama'] }}</td>
 						<td>{{ $kecamatan['kode'] }}</td>
-						<td>{{ $kecamatan['status'] }}</td>
+						<td class="text-center">{{ $kecamatan['status'] }}</td>
 						<td>{{ $kecamatan['modified_by'] }}</td>
 						<!-- <td>{{ $kecamatan['created_by'] }}</td> -->
 						<td>{{ $kecamatan['updated_at'] }}</td>

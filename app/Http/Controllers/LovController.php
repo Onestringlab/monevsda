@@ -10,17 +10,19 @@ use App\Log;
 class LovController extends Controller {
 
 public function index(){
-	$datalov = Lov::orderby('kategori')->get();
+	$datalov = Lov::orderby('kategori')->orderby('kode')->get();
 	return view('lov/lovlist',['datalov' => $datalov]);
 }
 
 public function insert(){
-	return view('lov/lovform',['action' => 'insert']);
+	$datastatus = Lov::where('kategori','status')->orderby('kode')->get();
+	return view('lov/lovform',['action' => 'insert', 'datastatus' => $datastatus]);
 }
 
 public function update($idlov){
 	$lov = Lov::find($idlov);
-	return view('lov/lovform',['row' => $lov,'action' => 'update']);
+	$datastatus = Lov::where('kategori','status')->orderby('kode')->get();
+	return view('lov/lovform',['row' => $lov, 'action' => 'update', 'datastatus' => $datastatus]);
 }
 
 public function delete($idlov){
@@ -35,6 +37,7 @@ public function manage(Request $request){
 		$lov -> kategori = $request -> kategori;
 		$lov -> kode = $request -> kode;
 		$lov -> value = $request -> value;
+		$lov -> status = $request -> status;
 		$lov -> modified_by = session()->get('username');
 		// $lov -> created_at = $request -> created_at;
 		// $lov -> updated_at = $request -> updated_at;
@@ -44,6 +47,7 @@ public function manage(Request $request){
     $log = new Log;
     $log -> aktivitas = 'Menambahkan data lov';
     $log -> keterangan = 'Data : '.$request -> kode.', '.$request -> value;
+    $log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 
@@ -54,6 +58,7 @@ public function manage(Request $request){
 		$lov -> kategori = $request -> kategori;
 		$lov -> kode = $request -> kode;
 		$lov -> value = $request -> value;
+		$lov -> status = $request -> status;
 		$lov -> modified_by = session()->get('username');
 		// $lov -> created_at = $request -> created_at;
 		// $lov -> updated_at = $request -> updated_at;
@@ -63,6 +68,7 @@ public function manage(Request $request){
     $log = new Log;
     $log -> aktivitas = 'Mengedit data lov';
     $log -> keterangan = 'Data : '.$request -> kode.', '.$request -> value;
+    $log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 	}
@@ -73,6 +79,7 @@ public function manage(Request $request){
     $log = new Log;
     $log -> aktivitas = 'Menghapus data lov';
     $log -> keterangan = 'Data : '.$lov -> kode.', '.$lov -> value;
+    $log -> tahun = session() -> get('ta');
     $log -> modified_by = session()->get('username');
     $log -> save();
 

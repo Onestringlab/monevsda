@@ -1,4 +1,4 @@
-@if (session()->has('name') && session()->get('name')!='')
+@if (session()->get('name')!='' && session()->has('name'))
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,6 +24,20 @@
 
     <!-- CSS Public -->
     <link href="{{asset('/')}}css/custom.css" rel="stylesheet">
+
+    @if(session()->get('role')!='Superman')
+      <style type="text/css" media="print">
+        BODY {display:none;visibility:hidden;}
+      </style>
+    @endif
+
+    <!-- jQuery -->
+    <script src="{{asset('/')}}vendors/jquery/dist/jquery.min.js"></script>
+    <!-- tableToCSV.js -->
+    <script src="{{asset('/')}}js/tableToCSV.js" rel="stylesheet"></script>
+    <!-- tableSearch.js -->
+    <script src="{{asset('/')}}js/tableSearch.js" rel="stylesheet"></script>
+
   </head>
 
   <body class="nav-md">
@@ -31,8 +45,9 @@
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ asset('/app')}}" class="site_title"><i class="fa fa-paw"></i> <span>SIMONESDA</span></a>
+            <div class="navbar nav_title text-center" style="border: 0; padding-top: 10px">
+              <!-- <a href="{{ asset('/app')}}" class="site_title"><i class="fa fa-desktop"></i> <span>e-Monev SDA</span></a> -->
+              <img src="{{asset('/')}}images/EMONEV-SDA.png" alt="" width="75px">
             </div>
 
             <div class="clearfix"></div>
@@ -40,7 +55,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="{{asset('/')}}images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="{{asset('/')}}dataunggah/gambar/{{ session() -> get('photo')}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Selamat Datang,</span>
@@ -59,21 +74,72 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <!-- <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                  @if(session()->get('role')=='Guest' || session()->get('role')=='Admin' || session()->get('role')=='Superman')
+                    <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="{{asset('/')}}dashboard1">Dasbor Pekerjaan</a></li>
+                        <li><a href="{{asset('/')}}dashboard2">Dasbor Keuangan</a></li>
+                        <li><a href="{{asset('/')}}pekerjaancari">Pencarian Pekerjaan</a></li>
+                      </ul>
+                    </li>
+                  @endif
+                  @if(session()->get('role')=='Superman' || (session()->get('role')=='Admin'))
+                  <li><a><i class="fa fa-desktop"></i> Monitoring <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
+                      <li><a href="{{asset('/')}}pekerjaanall">Pekerjaan</a></li>
+                      <li><a href="{{asset('/')}}program">Program - Kegiatan - Pekerjaan</a></li>
                     </ul>
-                  </li> -->
-                  @if(session()->get('role')=='Superman')
+                  </li>
+                  @endif
+                  @if(session()->get('role')=='Guest'|| session()->get('role')=='Superman' || (session()->get('role')=='Admin'))
+                  <li><a><i class="fa fa-archive"></i> Laporan <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{asset('/')}}lappekstat">Status Pekerjaan</a></li>
+                      <li><a href="{{asset('/')}}lapstatkemajuan">Status Kemajuan Pekerjaan</a></li>
+                      <li><a href="{{asset('/')}}lappekexpired">Status  Pekerjaan Kontrak Berakhir</a></li>
+                      <li><a href="{{asset('/')}}lappekakanexpired">Status  Pekerjaan Kontrak Akan Berakhir</a></li>
+                      <li><a href="{{asset('/')}}lappekcair">Status Pencairan Dana Pekerjaan</a></li>
+                      <li><a href="{{asset('/')}}lappeklok">Lokasi Pekerjaan</a></li>
+                      <li><a href="{{asset('/')}}lappekpej">Pekerjaan dan Pejabat</a></li>
+                      <li><a href="{{asset('/')}}lappekkon">Pekerjaan dan Pelaksana</a></li>
+                      <li><a href="{{asset('/')}}lapprokegpek">Program Kegiatan Pekerjaan</a></li>
+                      <li><a href="{{asset('/')}}laphasilpro">Hasil Pelaksanaan Program</a></li>
+                    </ul>
+                  </li>
+                  @endif
+                  @if(session()->get('role')=='Superman' || (session()->get('role')=='Admin'))
                   <li><a><i class="fa fa-database"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{asset('/')}}kecamatan">Kecamatan - Desa</a></li>
-                      <li><a href="{{asset('/')}}konsultan">Konsultan</a></li>
-                      <li><a href="{{asset('/')}}log">Log Aktifitas</a></li>
+                      <li><a href="{{asset('/')}}konsultan">Konsultan dan Kontraktor</a></li>
+                      <li><a href="{{asset('/')}}sk">SK - Penjabat</a></li>
+                    </ul>
+                  </li>
+                  @endif
+                  @if(session()->get('role')=='Admin' || session()->get('role')=='Superman')
+                    <li><a><i class="fa fa-book"></i>Dokumen<span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="{{asset('/')}}dokumen/manual_emonevsdakr.pdf" target="_blank">Petunjuk Penggunaan</a></li>
+                        <!-- <li><a href="index2.html">Dashboard2</a></li>
+                        <li><a href="index3.html">Dashboard3</a></li> -->
+                      </ul>
+                    </li>
+                  @endif
+                  @if(session()->get('role')=='Superman')
+                  <li><a><i class="fa fa-odnoklassniki"></i> Superman <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <!-- <li><a href="{{asset('/')}}hakakses">Hak Akses</a></li> -->
                       <li><a href="{{asset('/')}}lov">Lov</a></li>
+                      <li><a href="{{asset('/')}}log">Log Aktifitas</a></li>
+                      <li><a href="{{asset('/')}}pengawas">Pengawas</a></li>
                       <li><a href="{{asset('/')}}username">Pengguna</a></li>
+                    </ul>
+                  </li>
+                  @endif
+                  @if(session()->get('role')=='Pengawas')
+                  <li><a><i class="fa fa-odnoklassniki"></i> Pengawas <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{asset('/')}}pekerjaanpengawas">Pekerjaan</a></li>
                     </ul>
                   </li>
                   @endif
@@ -170,7 +236,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
+            <!-- <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
@@ -183,7 +249,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-            </div>
+            </div> -->
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -195,11 +261,10 @@
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
               </div>
-
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{asset('/')}}images/img.jpg" alt="">
+                    <img src="{{asset('/')}}dataunggah/gambar/{{session()->get('photo')}}" alt="">
                     @if (session()->has('name'))
                       {{session()->get('name')}}
                     @endif
@@ -217,7 +282,13 @@
                     <li><a href="{{asset('/')}}keluar"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
-
+                <li>
+                  <div style="margin-top: 20px; font-weight: bold;"> Tahun Anggaran
+                    @if (session()->has('ta'))
+                      {{session()->get('ta')}}
+                    @endif
+                  </div>
+                </li>
                 <!-- <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
@@ -300,7 +371,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            SIMONESDA - Dinas PU Kuburaya 2017
+            e-Monev SDA Ver.1.0 - Dinas PUPR KKR {{ session()->get('ta') }}
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -309,7 +380,7 @@
     </div>
 
     <!-- compose -->
-    <div class="compose col-md-6 col-xs-12">
+    <!-- <div class="compose col-md-6 col-xs-12">sdfsdf
       <div class="compose-header">
         New Message
         <button type="button" class="close compose-close">
@@ -395,11 +466,9 @@
       <div class="compose-footer">
         <button id="send" class="btn btn-sm btn-success" type="button">Send</button>
       </div>
-    </div>
+    </div> -->
     <!-- /compose -->
 
-    <!-- jQuery -->
-    <script src="{{asset('/')}}vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="{{asset('/')}}vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -410,10 +479,27 @@
     <script src="{{asset('/')}}vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
     <script src="{{asset('/')}}vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
     <script src="{{asset('/')}}vendors/google-code-prettify/src/prettify.js"></script>
-
     <!-- Custom Theme Scripts -->
-    <script src="{{asset('/')}}build/js/custom.min.js"></script>
+    <script src="{{asset('/')}}build/js/custom.js"></script>
+    <!-- chart.js -->
+    <script src="{{asset('/')}}vendors/Chart.js/dist/Chart.min.js"></script>
+    <script src="{{asset('/')}}vendors/Chart.js/dist/Chart.bundle.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+          //Disable cut copy
+          // $('body').bind('cut copy', function (e) {
+          //     e.preventDefault();
+          // });
+          //Disable mouse right click
+          // $("body").on("contextmenu",function(e){
+              // return false;
+          // });
+      });
+    </script>
 
   </body>
 </html>
+@else
+  {{ abort(404) }}
 @endif

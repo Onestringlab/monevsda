@@ -13,25 +13,25 @@
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">
-			<table class="table table-striped table-bordered ">
+			<table class="table table-striped jambo_table">
 				<thead>
-					<tr>
-						<th>#</th>
+					<tr class="headings">
+						<th >#</th>
 						<th>Kecamatan</th>
 						<th>Nama Desa</th>
 						<th>Kode</th>
-						<th>Status</th>
-						<th>Oleh</th>
-						<!-- <th>created_at</th> -->
-						<th>Waktu</th>
-						<th></th>
+						<th width="80px">Status</th>
+						<th width="80px">Oleh</th>
+						<!-- <th>created_by</th> -->
+						<th width="140px">Waktu</th>
+						<th width="140px"></th>
 					</tr>
 				</thead>
 				<tbody>
 					@php ($no = 1)
 					@foreach ($datadesa as $desa)
 					<tr>
-						<td>{{ $no++ }}</td>
+						<td class="text-center">{{ $no++ }}</td>
 						<td>{{ $desa->kecamatan['nama'] }}</td>
 						<td>{{ $desa['nama'] }}</td>
 						<td>{{ $desa['kode'] }}</td>

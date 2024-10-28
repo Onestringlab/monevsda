@@ -13,17 +13,18 @@
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">
-			<table class="table table-striped table-bordered ">
+			<table class="table table-striped jambo_table">
 				<thead>
 					<tr>
 						<th>#</th>
 						<th>Kategori</th>
 						<th>Kode</th>
 						<th>Value</th>
-						<th>Oleh</th>
+						<th>Status</th>
+						<th width="100px">Oleh</th>
 						<!-- <th>created_at</th> -->
-						<th>Waktu</th>
-						<th></th>
+						<th width="120px">Waktu</th>
+						<th width="100px"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,6 +35,7 @@
 						<td>{{ $lov['kategori'] }}</td>
 						<td>{{ $lov['kode'] }}</td>
 						<td>{{ $lov['value'] }}</td>
+						<td>{{ $lov['status'] }}</td>
 						<td>{{ $lov['modified_by'] }}</td>
 						<!-- <td>{{ $lov['created_at'] }}</td> -->
 						<td>{{ $lov['updated_at'] }}</td>

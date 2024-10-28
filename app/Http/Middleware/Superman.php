@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Cache;
 
 class Superman
 {
@@ -20,10 +21,10 @@ class Superman
       if($level =='Superman'){
           return $next($request);
       }else{
-          return abort(404);
+          return abort(403);
       }
     }else{
-      return abort(404);
+      return redirect('halamanlogin');
     }
   }
 }

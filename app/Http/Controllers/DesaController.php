@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+
+
 
 use App\Log;
 use App\Lov;
@@ -12,21 +15,31 @@ use App\Kecamatan;
 class DesaController extends Controller {
 
 public function index($idkecamatan){
-	$datadesa = Desa::where('idkecamatan',$idkecamatan)->orderby('nama','asc')->get();
+	$datadesa = Desa::where('idkecamatan',$idkecamatan)->orderby('nama','asc')->with('kecamatan')->get();
+
 	return view('desa/desalist',['datadesa' => $datadesa,'idkecamatan' => $idkecamatan]);
+}
+
+public function desaByKecamatan($idkecamatan){
+	$datadesa = Desa::select('iddesa','nama')->where('idkecamatan',$idkecamatan)->orderby('nama','asc')->get();
+
+	return $datadesa->toArray();
 }
 
 public function insert($idkecamatan){
 	$kecamatan = Kecamatan::find($idkecamatan);
 	$datastatus = Lov::where('kategori','status')->get();
-	$datadesa = Desa::where('idkecamatan',$idkecamatan)->orderby('nama','asc')->get();
+	// $datastatus = Cache::remember('datastatus',1,function(){
+	// 	return Lov::where('kategori','status')->get();
+	// });
+	$datadesa = Desa::where('idkecamatan',$idkecamatan)->orderby('nama','asc')->with('kecamatan')->get();
 	return view('desa/desaform',['action' => 'insert', 'kecamatan' => $kecamatan, 'datadesa' => $datadesa, 'datastatus' => $datastatus]);
 }
 
 public function update($iddesa){
 	$desa = Desa::find($iddesa);
 	$datastatus = Lov::where('kategori','status')->get();
-	$datadesa = Desa::where('idkecamatan',$desa->idkecamatan)->orderby('nama','asc')->get();
+	$datadesa = Desa::where('idkecamatan',$desa->idkecamatan)->orderby('nama','asc')->with('kecamatan')->get();
 	return view('desa/desaform',['row' => $desa, 'datastatus' => $datastatus, 'action' => 'update', 'datadesa' => $datadesa, 'kecamatan' => $desa->kecamatan]);
 }
 
@@ -52,7 +65,8 @@ public function manage(Request $request){
 		//data log
     $log = new Log;
     $log -> aktivitas = 'Menambahkan data desa';
-    $log -> keterangan = 'Data : '.$desa -> nama.', '.$desa->kecamatan->nama;
+    $log -> keterangan = json_encode($desa);
+    $log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 
@@ -73,7 +87,8 @@ public function manage(Request $request){
 		//data log
     $log = new Log;
     $log -> aktivitas = 'Mengedit data desa';
-    $log -> keterangan = 'Data : '.$desa -> nama.', '.$desa->kecamatan->nama;
+    $log -> keterangan = json_encode($desa);
+    $log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 	}
@@ -83,7 +98,8 @@ public function manage(Request $request){
 		//data log
     $log = new Log;
     $log -> aktivitas = 'Menghapus data desa';
-    $log -> keterangan = 'Data : '.$desa -> nama.', '.$desa->kecamatan->nama;
+    $log -> keterangan = json_encode($desa);
+    $log -> tahun = session() -> get('ta');
     $log -> modified_by = $request->session()->get('username');
     $log -> save();
 

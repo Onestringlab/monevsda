@@ -20,7 +20,7 @@ th{
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">
-			<table class="table table-striped table-bordered ">
+			<table class="table table-striped jambo_table">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -28,6 +28,7 @@ th{
 						<th>Nama</th>
 						<th>E-Mail</th>
 						<th>Role</th>
+						<th>Photo</th>
 						<th>Oleh</th>
 						{{--  <th>created_at</th>  --}}
 						<th>Waktu</th>
@@ -43,6 +44,7 @@ th{
 						<td>{{ $username['name'] }}</td>
 						<td>{{ $username['email'] }}</td>
 						<td>{{ $username['role'] }}</td>
+						<td> <img src="{{asset('/')}}dataunggah/gambar/{{ $username['photo']}}" width="50px"></td>
 						<td>{{ $username['modified_by'] }}</td>
 						{{--  <td>{{ $username['created_at'] }}</td>  --}}
 						<td>{{ $username['updated_at'] }}</td>

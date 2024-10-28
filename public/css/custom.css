@@ -2,6 +2,24 @@ th{
 	text-align: center
 }
 
+.besar{
+  font-size: 20px;
+}
+
+.putih{
+	color:white;
+}
+
+.hitam{
+	color:black;
+}
+
+.page_break { page-break-before: always; }
+
+.tebal{
+	font-size: 12px;color:black;
+}
+
 /* When the pattern is matched */
 input[type=text]:valid {
     color: black;
@@ -10,4 +28,13 @@ input[type=text]:valid {
 /* Unmatched */
 input[type=text]:invalid {
     color: red;
+}
+
+/* table search */
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+.results tr[visible='true']{
+  display:table-row;
 }
